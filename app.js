@@ -12,8 +12,11 @@ app.use(function(req,res,next){
 })
 
 
+//温度 2.2-2.6 随机  
+//证照放大
 
-var server = app.listen(3020, function () {
+
+var server = app.listen(8092, function () {
   var host = server.address().address;
   var port = server.address().port;
 

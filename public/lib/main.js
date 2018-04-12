@@ -1,3 +1,13 @@
+window.onload=function(){ 
+	setTimeout(function() { 
+	window.scrollTo(0, 1) 
+	}, 0); 
+}; 
+function ent(){
+		var t=$('.input1').val()
+
+		$('#id1').html(t)
+}
 $(function(){
 	$('.img_back').on('click',function(){
 		history.go(-1);
@@ -8,9 +18,51 @@ $(function(){
 	setmap();
 	$('.body').css({opacity:1}).addClass('animated rollIn')
 	setTimeout(function(){
-		$('.body').addClass('current')
+		$('.body').addClass('current');
+		setnum();
+		$('.num_cc1').lemCounter();
 	},1000)
+	$('.but1').on('click',function(){
+		$('.input1').val('');
+		location.href='index.html'
+	})
+	
+	
+	$('.input1').focus(function(){
+		document.activeElement.blur();
+	}).keyup(function(event){
+		if(event.keyCode ==13){
+			$(this).val('');
+		    location.href='index.html'
+		}
+	})
+	$('body').on('input propertychange','textarea',function(){
+		var t=$(this).val()
+		if(t.indexOf('\n')>-1){
+			$('.input1').val('');
+			location.href='index.html'
+		}
+		//$('#id1').html(t)
+	})
+
+	requestFullScreen();
+	if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {  
+                    bodyTag = document.getElementsByTagName('body')[0];  
+                    bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';  
+     }  
+	
+    
 })
+function requestFullScreen() {  
+    var de = document.documentElement;  
+    if (de.requestFullscreen) {  
+        de.requestFullscreen();  
+    } else if (de.mozRequestFullScreen) {  
+        de.mozRequestFullScreen();  
+    } else if (de.webkitRequestFullScreen) {  
+        de.webkitRequestFullScreen();  
+    }  
+} 
 function setmap(){
 	setTimeout(function(){
 		if(document.querySelector('#map1')){
@@ -39,6 +91,28 @@ function setmap(){
 			map8();
 		}
 	},1000)
+}
+function setnum(){
+	$('span.s1').each(function(){
+		var t=random(2.2,2.6,1);
+		$(this).html(t+`<em>°C</em>`)
+	})
+	$('span.s2').each(function(){
+		var t=random(40,50);
+		$(this).html(t+`<em>%</em>`)
+	})
+	$('span.wd_1').each(function(){
+		var t=random(4.5,6,1);
+		$(this).html(t);
+	})
+	$('span.sd_1').each(function(){
+		var t=random(40,50);
+		$(this).html(t);
+	})
+}
+function random(min,max,w){
+	return (Math.random()*(max-min)+min).toFixed(w || 0);
+
 }
 function map1(){
 	var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
